@@ -997,52 +997,93 @@
     }
     
     // Handle subscribe form submission
-    async function handleSubscribe(event) {
-      event.preventDefault();
-      const email = document.getElementById('email').value;
-      const subscribeButton = document.getElementById('subscribe-button');
-      
-      // Validate email
-      if (!email || !email.includes('@')) {
-        alert('Please enter a valid email address');
-        return;
-      }
-      
-      // Disable the button and start the progress bar
-      subscribeButton.disabled = true;
-      subscribeButton.classList.add('loading');
-      
-      try {
-        // Simulate API call with timeout
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        // In a real implementation, you would make an actual API call:
-        
-        const response = await fetch('https://jairisys-website.onrender.com/subscribe', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email }),
-        });
-        
-        if (!response.ok) {
-          throw new Error('Subscription failed');
-        }
-        
-        
-        // Show success message
-        alert('Thank you for subscribing! You will receive updates via email.');
-        document.getElementById('subscribe-form').reset();
-      } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again later.');
-      } finally {
-        // Re-enable the button and stop the progress bar
-        subscribeButton.disabled = false;
-        subscribeButton.classList.remove('loading');
-      }
+  // Handle subscribe form submission
+async function handleSubscribe(event) {
+  event.preventDefault();
+  console.log('Form submission started');
+
+  try {
+    // Safely get form elements
+    const form = event.target;
+    const emailInput = form.querySelector('input[type="email"], input[name="email"]');
+    const subscribeButton = form.querySelector('button[type="submit"]');
+
+    // Verify elements exist
+    if (!emailInput || !subscribeButton) {
+      throw new Error('Form elements not found - please check your HTML structure');
     }
+
+    const email = emailInput.value.trim();
+    console.log('Email entered:', email);
+
+    // Validate email
+    if (!email) {
+      throw new Error('Please enter your email address');
+    }
+
+    if (!email.includes('@') || !email.includes('.')) {
+      throw new Error('Please enter a valid email address');
+    }
+
+    // Disable the button and show loading state
+    subscribeButton.disabled = true;
+    subscribeButton.classList.add('loading');
+    subscribeButton.textContent = 'Submitting...';
+    console.log('Button state updated to loading');
+
+    // Make API call to your Express.js backend
+    console.log('Sending request to backend...');
+    const response = await fetch('https://jairisys-website.onrender.com/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    console.log('Response received, status:', response.status);
+
+    // Handle response
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || 'Subscription failed');
+    }
+
+    const responseData = await response.json();
+    console.log('Success response:', responseData);
+
+    // Show success message
+    alert(responseData.message || 'Thank you for subscribing!');
+    form.reset();
+    console.log('Form reset completed');
+
+  } catch (error) {
+    console.error('Error during submission:', error.message);
+    alert(error.message || 'An error occurred. Please try again later.');
+  } finally {
+    // Re-enable the button if it exists
+    const subscribeButton = document.querySelector('button[type="submit"]');
+    if (subscribeButton) {
+      subscribeButton.disabled = false;
+      subscribeButton.classList.remove('loading');
+      subscribeButton.textContent = 'Get Updates';
+      console.log('Button state reset');
+    }
+  }
+}
+
+// Add event listener with error handling
+document.addEventListener('DOMContentLoaded', function() {
+  const subscribeForm = document.getElementById('subscribe-form');
+  
+  if (subscribeForm) {
+    console.log('Form found in DOM, adding event listener');
+    subscribeForm.addEventListener('submit', handleSubscribe);
+  } else {
+    console.error('Error: Form with ID "subscribe-form" not found in DOM');
+    alert('Form configuration error - please contact support');
+  }
+});
     
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
