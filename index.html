@@ -997,7 +997,6 @@
     }
     
     // Handle subscribe form submission
-  // Handle subscribe form submission
 async function handleSubscribe(event) {
   event.preventDefault();
   console.log('Form submission started');
@@ -1031,8 +1030,8 @@ async function handleSubscribe(event) {
     subscribeButton.textContent = 'Submitting...';
     console.log('Button state updated to loading');
 
-    // Make API call to your Express.js backend
-    console.log('Sending request to backend...');
+     // Make API call
+     console.log('Sending request to backend...');
     const response = await fetch('https://jairisys-website.onrender.com/subscribe', {
       method: 'POST',
       headers: {
