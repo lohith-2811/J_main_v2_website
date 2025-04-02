@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <!-- Lottie Player -->
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <!-- Toastr for notifications -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <!-- Custom CSS -->
   <style>
     body {
@@ -126,6 +128,23 @@
     .btn-primary:hover {
       background: #52d1b2;
       transform: translateY(-3px);
+    }
+    .btn-primary:disabled {
+      background: #52d1b2;
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    /* Progress bar */
+    .progress {
+      height: 10px;
+      border-radius: 5px;
+      margin-top: 15px;
+      background-color: #0a192f;
+    }
+    .progress-bar {
+      background-color: #64ffda;
+      transition: width 0.3s ease;
     }
 
     /* Contact Information */
@@ -263,7 +282,13 @@
               <label for="message" class="form-label">Message</label>
               <textarea class="form-control" id="message" rows="5" placeholder="Enter your message" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Send Message</button>
+            <button type="submit" id="submit-btn" class="btn btn-primary">
+              <span id="btn-text">Send Message</span>
+              <span id="btn-spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+            </button>
+            <div class="progress d-none" id="progress-bar">
+              <div class="progress-bar" id="progress-bar-fill" role="progressbar" style="width: 0%"></div>
+            </div>
           </form>
         </div>
 
@@ -279,8 +304,6 @@
                 autoplay
               ></lottie-player>
             </div>
-            <h2>Our Location</h2>
-            <p>0-1 Jairisys, Tech City, TC 12345</p>
             <h2>Phone</h2>
             <p>+91 96922xxxxx</p>
             <h2>Email</h2>
@@ -313,13 +336,49 @@
   <!-- Bootstrap JS and dependencies -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+  <!-- Toastr for notifications -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <!-- Custom JS -->
-  <script src="scripts/script.js"></script>
-
-  <!-- Add the provided script here -->
   <script>
+    // Configure Toastr
+    toastr.options = {
+      closeButton: true,
+      progressBar: true,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      showDuration: '300',
+      hideDuration: '1000',
+      timeOut: '5000',
+      extendedTimeOut: '1000',
+      showEasing: 'swing',
+      hideEasing: 'linear',
+      showMethod: 'fadeIn',
+      hideMethod: 'fadeOut'
+    };
+
     document.getElementById('contact-form').addEventListener('submit', function (event) {
       event.preventDefault(); // Prevent the default form submission
+
+      // Get form elements
+      const submitBtn = document.getElementById('submit-btn');
+      const btnText = document.getElementById('btn-text');
+      const btnSpinner = document.getElementById('btn-spinner');
+      const progressBar = document.getElementById('progress-bar');
+      const progressBarFill = document.getElementById('progress-bar-fill');
+
+      // Disable button and show loading state
+      submitBtn.disabled = true;
+      btnText.textContent = 'Sending...';
+      btnSpinner.classList.remove('d-none');
+      progressBar.classList.remove('d-none');
+
+      // Simulate progress (in a real app, you'd update this based on actual upload progress)
+      let progress = 0;
+      const progressInterval = setInterval(() => {
+        progress += 10;
+        progressBarFill.style.width = `${progress}%`;
+        if (progress >= 90) clearInterval(progressInterval);
+      }, 200);
 
       const formData = {
         name: document.getElementById('name').value,
@@ -334,13 +393,39 @@
         },
         body: JSON.stringify(formData),
       })
-        .then((response) => response.text())
+        .then((response) => {
+          // Complete progress bar
+          progressBarFill.style.width = '100%';
+          clearInterval(progressInterval);
+          
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
         .then((data) => {
-          alert(data); // Show success or error message
+          // Show success message
+          toastr.success('Your message has been sent successfully!', 'Success');
+          
+          // Reset form
+          document.getElementById('contact-form').reset();
         })
         .catch((error) => {
           console.error('Error:', error);
-          alert('Failed to send message');
+          // Show error message
+          toastr.error('Failed to send message. Please try again later.', 'Error');
+        })
+        .finally(() => {
+          // Reset button and progress bar
+          submitBtn.disabled = false;
+          btnText.textContent = 'Send Message';
+          btnSpinner.classList.add('d-none');
+          
+          // Hide progress bar after a delay
+          setTimeout(() => {
+            progressBar.classList.add('d-none');
+            progressBarFill.style.width = '0%';
+          }, 1000);
         });
     });
   </script>
