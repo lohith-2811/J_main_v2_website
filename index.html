@@ -1018,9 +1018,9 @@
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            animateValue('userCount', 0, 12, 2000);
-            animateValue('downloadCount', 0, 100, 2000);
-            animateValue('subscriberCount', 0, 100, 2000);
+            animateValue('userCount', 0, 42, 2000);
+            animateValue('downloadCount', 0, 1832, 2000);
+            animateValue('subscriberCount', 0, 264, 2000);
             observer.unobserve(entry.target);
           }
         });
