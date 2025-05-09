@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service | Jairisys Learn - Programming Education Platform</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <style>
+    :root {
+      --primary: #0a192f;
+      --secondary: #112240;
+      --accent: #64ffda;
+      --text-primary: #ccd6f6;
+      --text-secondary: #8892b0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background: rgba(10, 25, 47, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    
+    .logo img {
+      height: 45px;
+      margin-right: 12px;
+    }
+    
+    .nav-link {
+      position: relative;
+      color: var(--text-primary);
+      font-weight: 500;
+      margin: 0 0.5rem;
+      padding: 0.5rem 1rem !important;
+    }
+    
+    .nav-link:hover {
+      color: var(--accent);
+    }
+    
+    .nav-link.active {
+      color: var(--accent);
+    }
+
+    /* Terms Content */
+    .terms-container {
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+    }
+    
+    .terms-header {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+    
+    .terms-header h1 {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    
+    .terms-header p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+    
+    .terms-section {
+      margin-bottom: 3rem;
+    }
+    
+    .terms-section h2 {
+      color: var(--accent);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid rgba(100, 255, 218, 0.3);
+    }
+    
+    .terms-section h3 {
+      color: var(--text-primary);
+      font-size: 1.3rem;
+      margin: 1.5rem 0 1rem;
+    }
+    
+    .terms-section p, .terms-section ul {
+      margin-bottom: 1.2rem;
+      color: var(--text-secondary);
+    }
+    
+    .terms-section ul {
+      padding-left: 1.5rem;
+    }
+    
+    .terms-section li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .highlight-box {
+      background: var(--secondary);
+      border-left: 4px solid var(--accent);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 5px 5px 0;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--secondary);
+      color: var(--text-primary);
+      padding: 3rem 0 2rem;
+    }
+    
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+    }
+    
+    .footer-column {
+      flex: 1;
+      min-width: 250px;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-column h3 {
+      font-size: 1.3rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+    
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(100, 255, 218, 0.1);
+      color: var(--accent);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background: var(--accent);
+      color: var(--primary);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(100, 255, 218, 0.1);
+    }
+    
+    .footer-bottom p {
+      color: var(--text-secondary);
+      margin-bottom: 0;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .terms-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .terms-section h2 {
+        font-size: 1.5rem;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+ 
+
+  <!-- Terms of Service Content -->
+  <main class="terms-container">
+    <div class="terms-header">
+      <h1>Terms of Service</h1>
+      <p>Last Updated: May 9, 2025</p>
+    </div>
+    
+    <div class="terms-section">
+      <p>Welcome to Jairisys Learn ("we," "us," or "our"). These Terms of Service ("Terms") govern your access to and use of our programming education platform, including learning modules, coding practice environments, leaderboards, XP points system, voucher redemption, and account management features (collectively, the "Services").</p>
+      
+      <div class="highlight-box">
+        <p><strong>By accessing or using our Services, you agree to be bound by these Terms. If you do not agree to these Terms, you may not use our Services.</strong></p>
+      </div>
+    </div>
+    
+    <div class="terms-section">
+      <h2>1. Account Registration</h2>
+      
+      <h3>1.1 Eligibility</h3>
+      <p>To use our Services, you must:</p>
+      <ul>
+        <li>Be at least 13 years old (or the minimum age required in your jurisdiction)</li>
+        <li>Have the legal capacity to enter into these Terms</li>
+        <li>Provide accurate and complete registration information</li>
+      </ul>
+      
+      <h3>1.2 Account Types</h3>
+      <p>We offer the following account types:</p>
+      <ul>
+        <li><strong>Learner Accounts:</strong> For individuals learning programming languages</li>
+        <li><strong>Premium Accounts:</strong> For users with access to advanced features and content</li>
+      </ul>
+      
+      <h3>1.3 Account Security</h3>
+      <p>You are responsible for:</p>
+      <ul>
+        <li>Maintaining the confidentiality of your login credentials</li>
+        <li>All activities that occur under your account</li>
+        <li>Promptly notifying us of any unauthorized use</li>
+      </ul>
+      
+      <h3>1.4 Account Deletion</h3>
+      <p>You may delete your account at any time through the settings menu. Upon deletion:</p>
+      <ul>
+        <li>Your personal data will be removed in accordance with our Privacy Policy</li>
+        <li>Earned XP points and redeemed vouchers will be forfeited</li>
+        <li>Leaderboard rankings will be removed</li>
+      </ul>
+    </div>
+    
+    <div class="terms-section">
+      <h2>2. Use of Services</h2>
+      
+      <h3>2.1 Permitted Use</h3>
+      <p>Our Services may be used for:</p>
+      <ul>
+        <li>Learning programming languages through interactive modules</li>
+        <li>Practicing coding in our integrated development environments</li>
+        <li>Participating in leaderboards and earning XP points</li>
+        <li>Redeeming XP points for vouchers or coupons</li>
+        <li>Tracking learning progress and levels</li>
+      </ul>
+      
+      <h3>2.2 Prohibited Conduct</h3>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Use the Services for any illegal or unauthorized purpose</li>
+        <li>Attempt to gain unauthorized access to our systems or other users' accounts</li>
+        <li>Reverse engineer, decompile, or disassemble any software</li>
+        <li>Upload or share harmful code or content (viruses, malware, etc.)</li>
+        <li>Engage in cheating or manipulating leaderboards or XP points</li>
+        <li>Harass, bully, or discriminate against other users</li>
+        <li>Violate any applicable laws or regulations</li>
+      </ul>
+      
+      <h3>2.3 Content Standards</h3>
+      <p>User-generated content, including code submissions and profile information, must:</p>
+      <ul>
+        <li>Be appropriate for an educational platform</li>
+        <li>Not infringe on intellectual property rights</li>
+        <li>Not contain personally identifiable information without consent</li>
+        <li>Not include offensive or harmful material</li>
+      </ul>
+    </div>
+    
+    <div class="terms-section">
+      <h2>3. XP Points and Voucher Redemption</h2>
+      
+      <h3>3.1 Earning XP Points</h3>
+      <p>XP points are earned by:</p>
+      <ul>
+        <li>Completing learning modules</li>
+        <li>Submitting correct solutions to coding challenges</li>
+        <li>Participating in community activities (where applicable)</li>
+      </ul>
+      
+      <h3>3.2 Voucher Redemption</h3>
+      <p>XP points may be redeemed for vouchers or coupons, subject to:</p>
+      <ul>
+        <li>Availability of vouchers</li>
+        <li>Specific redemption thresholds and terms</li>
+        <li>Expiration dates or usage restrictions</li>
+        <li>Non-transferability of vouchers</li>
+      </ul>
+      
+      <h3>3.3 Leaderboard Participation</h3>
+      <p>Leaderboard rankings are based on XP points earned. We reserve the right to:</p>
+      <ul>
+        <li>Remove users for suspected cheating or abuse</li>
+        <li>Adjust point calculations or leaderboard criteria</li>
+      </ul>
+    </div>
+    
+    <div class="terms-section">
+      <h2>4. Intellectual Property</h2>
+      
+      <h3>4.1 Our Content</h3>
+      <p>All rights, title, and interest in the Services (including learning modules, coding environments, text, graphics, and logos) are owned by or licensed to Jairisys Learn. You receive a limited, non-exclusive, non-transferable license to use the Services as permitted by these Terms.</p>
+      
+      <h3>4.2 Your Content</h3>
+      <p>You retain ownership of content you create or upload (e.g., code submissions), but grant us a worldwide, non-exclusive license to use, host, and display such content to provide and improve the Services.</p>
+    </div>
+    
+    <div class="terms-section">
+      <h2>5. Privacy and Data Protection</h2>
+      <p>Our collection and use of personal information is governed by our <a href="privacy.html" style="color: var(--accent);">Privacy Policy</a>. Key provisions include:</p>
+      <ul>
+        <li>Data security measures to protect user information</li>
+        <li>Compliance with applicable data protection laws (e.g., GDPR, CCPA)</li>
+        <li>Retention of progress data for account recovery unless deleted</li>
+      </ul>
+    </div>
+    
+    <div class="terms-section">
+      <h2>6. Fees and Payments</h2>
+      
+      <h3>6.1 Subscription Plans</h3>
+      <p>Some features require paid subscriptions, including:</p>
+      <ul>
+        <li>Premium learning modules</li>
+        <li>Advanced coding challenges</li>
+        <li>Exclusive voucher redemption options</li>
+      </ul>
+      
+      <h3>6.2 Payment Terms</h3>
+      <ul>
+        <li>Fees are non-refundable except as required by law</li>
+        <li>Subscriptions renew automatically unless canceled</li>
+        <li>Price changes will be notified 30 days in advance</li>
+      </ul>
+      
+      <h3>6.3 Free Access</h3>
+      <p>Basic features are available for free, with limitations on content and redemption options.</p>
+    </div>
+    
+    <div class="terms-section">
+      <h2>7. Termination</h2>
+      
+      <h3>7.1 By You</h3>
+      <p>You may stop using our Services or delete your account at any time via the settings menu.</p>
+      
+      <h3>7.2 By Us</h3>
+      <p>We may suspend or terminate your access if you:</p>
+      <ul>
+        <li>Violate these Terms</li>
+        <li>Fail to pay fees when due</li>
+        <li>Engage in conduct that risks our systems or other users</li>
+        <li>Manipulate leaderboards or XP points</li>
+      </ul>
+      
+      <h3>7.3 Effect of Termination</h3>
+      <p>Upon termination:</p>
+      <ul>
+        <li>Your right to use the Services immediately ceases</li>
+        <li>Earned XP points and unredeemed vouchers are forfeited</li>
+        <li>We may retain anonymized data for analytics purposes</li>
+        <li>Outstanding fees become immediately due</li>
+      </ul>
+    </div>
+    
+    <div class="terms-section">
+      <h2>8. Disclaimers and Limitations</h2>
+      
+      <h3>8.1 Service "As Is"</h3>
+      <p>Our Services are provided "as is" without warranties of any kind. We do not guarantee:</p>
+      <ul>
+        <li>That the Services will meet all your requirements</li>
+        <li>Uninterrupted or error-free operation</li>
+        <li>Accuracy of learning content or coding environments</li>
+        <li>Availability of vouchers or coupons</li>
+      </ul>
+      
+      <h3>8.2 Limitation of Liability</h3>
+      <p>To the maximum extent permitted by law, Jairisys Learn shall not be liable for:</p>
+      <ul>
+        <li>Indirect, incidental, or consequential damages</li>
+        <li>Loss of data, XP points, or vouchers</li>
+        <li>Claims related to third-party services or integrations</li>
+      </ul>
+      
+      <div class="highlight-box">
+        <p><strong>Some jurisdictions do not allow certain limitations, so some of these exclusions may not apply to you.</strong></p>
+      </div>
+    </div>
+    
+    <div class="terms-section">
+      <h2>9. General Provisions</h2>
+      
+      <h3>9.1 Governing Law</h3>
+      <p>These Terms shall be governed by the laws of the State of California, without regard to conflict of law principles.</p>
+      
+      <h3>9.2 Dispute Resolution</h3>
+      <p>Any disputes shall be resolved through binding arbitration in San Francisco, CA, except for claims requiring injunctive relief.</p>
+      
+      <h3>9.3 Changes to Terms</h3>
+      <p>We may modify these Terms at any time. Material changes will be notified through:</p>
+      <ul>
+        <li>Email to registered users</li>
+        <li>Prominent notices within the Services</li>
+        <li>Updated "Last Updated" date</li>
+      </ul>
+      <p>Continued use after changes constitutes acceptance.</p>
+      
+      <h3>9.4 Entire Agreement</h3>
+      <p>These Terms constitute the entire agreement between you and Jairisys Learn regarding the Services.</p>
+    </div>
+    
+    <div class="terms-section">
+      <h2>10. Contact Information</h2>
+      <p>For questions about these Terms, please contact us:</p>
+      <ul>
+        <li><strong>Email:</strong> info@jairisys.tech</li>
+      </ul>
+    </div>
+  </main>
+
+  
+      
+      <div class="footer-bottom">
+        <p>© 2025 Jairisys Tech. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+  <!-- Custom JS -->
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>
